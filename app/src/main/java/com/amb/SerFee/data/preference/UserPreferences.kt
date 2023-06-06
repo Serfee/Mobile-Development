@@ -44,6 +44,18 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
         }
     }
 
+    fun getToken(): Flow<String?> {
+        return dataStore.data.map { preferences ->
+            preferences[TOKEN]
+        }
+    }
+
+    suspend fun setToken(token: String) {
+        dataStore.edit { preferences ->
+            preferences[TOKEN] = token
+        }
+    }
+
     suspend fun login() {
         dataStore.edit { preferences ->
             preferences[STATE] = true

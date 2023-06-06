@@ -17,14 +17,18 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.amb.SerFee.R
 import com.amb.SerFee.databinding.ActivityAddStoryBinding
 import com.amb.SerFee.util.ViewModelFactory
 import com.amb.SerFee.util.createCustomTempFile
 import com.amb.SerFee.util.reduceFileImage
 import com.amb.SerFee.data.Result
+import com.amb.SerFee.data.preference.UserPreferences
+import com.amb.SerFee.di.dataStore
 import com.amb.SerFee.util.uriToFile
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -153,36 +157,47 @@ override fun onCreate(savedInstanceState: Bundle?) {
         }
     }
 
+
     private fun uploadPicture() {
-        addStoryViewModel.getUser().observe(this@AddStoryActivity) { user ->
-            val token = "Bearer ${user.token}"
-            if (getFile != null) {
-                val file = reduceFileImage(getFile as File)
-                val description = "${binding.etDesc.text}".toRequestBody("text/plain".toMediaType())
-                val lat = if (location != null) location?.latitude.toString().toRequestBody("text/plain".toMediaType()) else null
-                val lon = if (location != null) location?.longitude.toString().toRequestBody("text/plain".toMediaType()) else null
-                val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
-                addStoryViewModel.addStory(token, imageMultipart, description, lat, lon).observe(this@AddStoryActivity) { result ->
-                    when (result) {
-                        is Result.Success -> {
-                            Toast.makeText(this@AddStoryActivity, result.data.message, Toast.LENGTH_SHORT).show()
-                            showProgressIndicator(false)
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finish()
-                        }
-                        is Result.Loading -> showProgressIndicator(true)
-                        is Result.Error -> {
-                            Toast.makeText(this@AddStoryActivity, result.error, Toast.LENGTH_SHORT).show()
-                            showProgressIndicator(false)
+        lifecycleScope.launch {
+            UserPreferences.getInstance(dataStore).setToken("your_token_here")
+            UserPreferences.getInstance(dataStore).getToken().collect { token ->
+                if (token != null) {
+                    val bearerToken = "Bearer $token"
+                    addStoryViewModel.getUser().observe(this@AddStoryActivity) { user ->
+                        if (getFile != null) {
+                            val file = reduceFileImage(getFile as File)
+                            val description = "${binding.etDesc.text}".toRequestBody("text/plain".toMediaType())
+                            val lat = if (location != null) location?.latitude.toString().toRequestBody("text/plain".toMediaType()) else null
+                            val lon = if (location != null) location?.longitude?.toString()?.toRequestBody("text/plain".toMediaType()) else null
+                            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
+                            addStoryViewModel.addStory(bearerToken, imageMultipart, description, lat, lon).observe(this@AddStoryActivity) { result ->
+                                when (result) {
+                                    is Result.Success -> {
+                                        Toast.makeText(this@AddStoryActivity, result.data.message, Toast.LENGTH_SHORT).show()
+                                        showProgressIndicator(false)
+                                        startActivity(Intent(this@AddStoryActivity, MainActivity::class.java))
+                                        finish()
+                                    }
+                                    is Result.Loading -> showProgressIndicator(true)
+                                    is Result.Error -> {
+                                        Toast.makeText(this@AddStoryActivity, result.error, Toast.LENGTH_SHORT).show()
+                                        showProgressIndicator(false)
+                                    }
+                                }
+                            }
+                        } else {
+                            Toast.makeText(this@AddStoryActivity, getString(R.string.input_image_first), Toast.LENGTH_SHORT).show()
                         }
                     }
+                } else {
+                    Toast.makeText(this@AddStoryActivity, getString(R.string.token_not_found), Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this@AddStoryActivity, getString(R.string.input_image_first), Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     private fun openGallery() {
         val intent = Intent()
@@ -233,6 +248,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
             }
         }
     }
+
 private fun showProgressIndicator(isLoading: Boolean) {
     binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 }

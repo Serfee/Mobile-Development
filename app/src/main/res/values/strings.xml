@@ -35,4 +35,6 @@
     <string name="date">21 Juni 2022</string>
     <string name="image_description">Picture of %1$s</string>
     <string name="detail_story">Detail Story</string>
+    <string name="token_not_found">Token is not found</string>
+
 </resources>
