@@ -22,14 +22,14 @@ interface ApiService {
         @Body request: LoginRequest
     ): LoginResponse
 
-    @GET("stories")
+    @GET("tasks/response")
     suspend fun getStory(
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
     ): StoryResponse
 
-    @GET("stories")
+    @GET("tasks/response")
     suspend fun getStoryLocation(
         @Header("Authorization") token: String,
         @Query("location") location : Int = 1,

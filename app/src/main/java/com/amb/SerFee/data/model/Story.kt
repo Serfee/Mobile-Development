@@ -6,18 +6,18 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Story(
-    @SerializedName("id")
+    @SerializedName("request_id")
     val id: String,
-    @SerializedName("name")
+    @SerializedName("full_name")
     val name: String?,
     @SerializedName("description")
     val description: String?,
-    @SerializedName("photoUrl")
+    @SerializedName("image_url")
     val photoUrl: String?,
-    @SerializedName("createdAt")
+    @SerializedName("created_at")
     val createdAt: String?,
-    @SerializedName("lat")
+    @SerializedName("location_latitude")
     val lat: Double,
-    @SerializedName("lon")
+    @SerializedName("location_longitude")
     val lon: Double
 ): Parcelable

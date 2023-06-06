@@ -35,4 +35,7 @@
     <string name="date">21 Juni 2022</string>
     <string name="image_description">Picture of %1$s</string>
     <string name="detail_story">Detail Story</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_add_job">Add Task</string>
 </resources>
