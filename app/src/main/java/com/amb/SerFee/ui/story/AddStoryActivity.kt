@@ -40,6 +40,7 @@ class AddStoryActivity : AppCompatActivity() {
     private var location: Location? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+
     private var getFile: File? = null
 
     companion object {
@@ -232,7 +233,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
             }
         }
     }
-
 private fun showProgressIndicator(isLoading: Boolean) {
     binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 }

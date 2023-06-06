@@ -11,13 +11,13 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @POST("register")
+    @POST("auth/register")
     suspend fun register(
         @Body request: RegisterRequest
     ): BaseResponse
 
 
-    @POST("login")
+    @POST("auth/login")
     suspend fun login(
         @Body request: LoginRequest
     ): LoginResponse
@@ -36,7 +36,7 @@ interface ApiService {
     ) : StoryResponse
 
     @Multipart
-    @POST("stories")
+    @POST("tasks/request")
     suspend fun addStory(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
