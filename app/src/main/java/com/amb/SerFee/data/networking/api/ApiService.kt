@@ -1,6 +1,7 @@
 package com.amb.SerFee.data.networking.api
 
 import com.amb.SerFee.data.networking.response.BaseResponse
+import com.amb.SerFee.data.networking.response.CategoryResponse
 import com.amb.SerFee.data.networking.response.LoginResponse
 import com.amb.SerFee.data.networking.response.StoryResponse
 import com.amb.SerFee.data.request.LoginRequest
@@ -22,18 +23,23 @@ interface ApiService {
         @Body request: LoginRequest
     ): LoginResponse
 
-    @GET("tasks/response")
+    @GET("tasks")
     suspend fun getStory(
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
     ): StoryResponse
 
-    @GET("tasks/response")
+    @GET("tasks")
     suspend fun getStoryLocation(
         @Header("Authorization") token: String,
         @Query("location") location : Int = 1,
     ) : StoryResponse
+
+    @GET("tasks/category")
+    suspend fun getCategories(
+        @Header("Authorization") token: String
+    ): CategoryResponse
 
     @Multipart
     @POST("tasks/request")
