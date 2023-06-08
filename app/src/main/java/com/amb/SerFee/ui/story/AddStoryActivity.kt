@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -23,22 +24,57 @@ import com.amb.SerFee.util.ViewModelFactory
 import com.amb.SerFee.util.createCustomTempFile
 import com.amb.SerFee.util.reduceFileImage
 import com.amb.SerFee.data.Result
+import com.amb.SerFee.data.networking.api.ApiService
 import com.amb.SerFee.util.uriToFile
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import retrofit2.Response
+import com.amb.SerFee.data.networking.response.CategoryResponse
+import com.amb.SerFee.data.model.Category
+
+
+
 
 class AddStoryActivity : AppCompatActivity() {
+
+    private val apiService: ApiService by lazy {
+        val client = OkHttpClient.Builder()
+            .build()
+
+        Retrofit.Builder()
+            .baseUrl("http://192.168.1.155:3000/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }
+
+
 
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var currentPhotoPath: String
     private lateinit var addStoryViewModel: AddStoryViewModel
     private var location: Location? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var categories: List<String> = emptyList()
+
+    //private val apiService: ApiService = ApiService.create()
+    private lateinit var dropdownMenuBinding: MaterialAutoCompleteTextView
+
+
 
 
     private var getFile: File? = null
@@ -70,31 +106,43 @@ class AddStoryActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding = ActivityAddStoryBinding.inflate(layoutInflater)
-    setContentView(binding.root)
-    supportActionBar?.hide()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAddStoryBinding.inflate(layoutInflater)
+        dropdownMenuBinding = binding.dropdownMenu as MaterialAutoCompleteTextView
 
-    if (!allPermissionsGranted()) {
-        ActivityCompat.requestPermissions(
-            this,
-            REQUIRED_PERMISSIONS,
-            REQUEST_CODE_PERMISSIONS
-        )
+
+
+        setContentView(binding.root)
+        supportActionBar?.hide()
+
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+
+        setupASAVModel()
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        with(binding) {
+            btnCamera.setOnClickListener { startTakePhoto() }
+            btnGallery.setOnClickListener { openGallery() }
+            btnUpload.setOnClickListener { uploadPicture() }
+            icSearchLocation.setOnClickListener { getMyCurrentLocation() }
+
+            dropdownMenuBinding.setAdapter<ArrayAdapter<String>>(ArrayAdapter(
+                this@AddStoryActivity,
+                android.R.layout.simple_dropdown_item_1line,
+                categories
+            ))
+            getCategories()
+        }
     }
 
-    setupASAVModel()
-
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-    with(binding) {
-        btnCamera.setOnClickListener { startTakePhoto() }
-        btnGallery.setOnClickListener { openGallery() }
-        btnUpload.setOnClickListener { uploadPicture() }
-        icSearchLocation.setOnClickListener { getMyCurrentLocation() }
-    }
-}
 
     private fun setupASAVModel() {
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
@@ -233,7 +281,48 @@ override fun onCreate(savedInstanceState: Bundle?) {
             }
         }
     }
-private fun showProgressIndicator(isLoading: Boolean) {
-    binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-}
+    private fun showProgressIndicator(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+
+    private fun getCategories() {
+        addStoryViewModel.getUser().observe(this@AddStoryActivity) { user ->
+            val token = "Bearer ${user.token}"
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val categoryResponse = apiService.getCategories(token)
+                    val categories = categoryResponse.category.map { it.category_name }
+                    if (categories != null) {
+                        withContext(Dispatchers.Main) {
+                            populateDropdownMenu(categories)
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Handle network or other errors
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@AddStoryActivity,
+                            "Error: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    private fun populateDropdownMenu(categories: List<String>) {
+        val adapter = ArrayAdapter(
+            this@AddStoryActivity,
+            android.R.layout.simple_dropdown_item_1line,
+            categories
+        )
+        dropdownMenuBinding.setAdapter<ArrayAdapter<String>>(adapter)
+    }
+
+
 }
