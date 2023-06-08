@@ -44,6 +44,8 @@ import java.io.File
 import retrofit2.Response
 import com.amb.SerFee.data.networking.response.CategoryResponse
 import com.amb.SerFee.data.model.Category
+import com.amb.SerFee.databinding.ActivityProfileBinding
+import com.bumptech.glide.Glide
 
 
 
@@ -65,6 +67,7 @@ class AddStoryActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityAddStoryBinding
+    private lateinit var binding2: ActivityProfileBinding
     private lateinit var currentPhotoPath: String
     private lateinit var addStoryViewModel: AddStoryViewModel
     private var location: Location? = null
@@ -111,8 +114,6 @@ class AddStoryActivity : AppCompatActivity() {
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         dropdownMenuBinding = binding.dropdownMenu as MaterialAutoCompleteTextView
 
-
-
         setContentView(binding.root)
         supportActionBar?.hide()
 
@@ -141,6 +142,8 @@ class AddStoryActivity : AppCompatActivity() {
             ))
             getCategories()
         }
+
+        getCurrentUser()
     }
 
 
@@ -311,6 +314,41 @@ class AddStoryActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getCurrentUser() {
+        addStoryViewModel.getUser().observe(this@AddStoryActivity) { user ->
+            val token = "Bearer ${user.token}"
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val currentResponse = apiService.current(token)
+                    val currentUser = currentResponse.user
+                    withContext(Dispatchers.Main) {
+                        // Update the UI with the user data
+                        binding2.profileName.text = currentUser?.name
+                        binding2.profileEmail.text = currentUser?.email
+                        binding2.profileBio.text = "Some bio text" // Set an appropriate bio here
+                        // Load the profile image using a library like Glide
+                        Glide.with(this@AddStoryActivity)
+                            .load(currentUser?.photoUrl)
+                            .placeholder(R.drawable.ic_home)
+                            .error(R.drawable.ic_home)
+                            .into(binding2.profileImage)
+                        binding2.ratingBar.rating = (currentUser?.rating ?: 0f) as Float
+                    }
+                } catch (e: Exception) {
+                    // Handle network or other errors
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@AddStoryActivity,
+                            "Error: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
 
 
 

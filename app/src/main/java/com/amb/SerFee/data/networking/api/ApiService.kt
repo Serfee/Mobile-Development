@@ -2,6 +2,7 @@ package com.amb.SerFee.data.networking.api
 
 import com.amb.SerFee.data.networking.response.BaseResponse
 import com.amb.SerFee.data.networking.response.CategoryResponse
+import com.amb.SerFee.data.networking.response.CurrentResponse
 import com.amb.SerFee.data.networking.response.LoginResponse
 import com.amb.SerFee.data.networking.response.StoryResponse
 import com.amb.SerFee.data.request.LoginRequest
@@ -26,7 +27,7 @@ interface ApiService {
     @POST("users/current")
     suspend fun current(
         @Header("Authorization") token: String,
-    ): LoginResponse
+    ): CurrentResponse
 
     @GET("tasks")
     suspend fun getStory(

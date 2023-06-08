@@ -16,7 +16,6 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
         private var INSTANCE: UserPreferences? = null
         private val NAME = stringPreferencesKey("name")
         private val TOKEN = stringPreferencesKey("token")
-        private val PHOTOURL = stringPreferencesKey("photoUrl")
         private val STATE = booleanPreferencesKey("state")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreferences {
@@ -32,10 +31,9 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
         return dataStore.data.map { preferences ->
             val name = preferences[NAME] ?: ""
             val token = preferences[TOKEN] ?: ""
-            val photoUrl = preferences[TOKEN] ?: ""
             val state = preferences[STATE] ?: false
 
-            User(name, token, photoUrl, state)
+            User(name, token, state)
         }
     }
 
@@ -43,7 +41,6 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
         dataStore.edit { preferences ->
             preferences[NAME] = user.name
             preferences[TOKEN] = user.token
-            preferences[PHOTOURL] = user.photoUrl
             preferences[STATE] = user.isLogin
         }
     }

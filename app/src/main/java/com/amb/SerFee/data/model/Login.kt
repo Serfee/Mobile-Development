@@ -7,8 +7,6 @@ data class Login(
     val userId: String?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("photoUrl")
-    val photoUrl: String?,
     @SerializedName("token")
     val token: String?
 )
