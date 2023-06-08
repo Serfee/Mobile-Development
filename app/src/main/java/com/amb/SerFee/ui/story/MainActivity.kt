@@ -111,18 +111,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.menu_maps -> {
-                // Handle Maps menu item click
-                // Implement your logic here
                 startActivity(Intent(this, MapsActivity::class.java))
                 return true
             }
             R.id.menu_add_story -> {
-                // Handle Add Story menu item click
-                // Implement your logic here
-                startActivity(Intent(this, AddStoryActivity::class.java))
+                // The AddStoryActivity will be shown by the BottomNavigationView
                 return true
             }
         }
         return false
     }
+
+
 }
