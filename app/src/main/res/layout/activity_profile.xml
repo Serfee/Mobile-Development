@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/top_bar_background"
+        android:background="@color/purple_200"
         tools:ignore="MissingConstraints">
 
         <!-- Save Button -->
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:textColor="@color/white"
-            android:background="@color/accent_color"/>
+            android:background="@color/purple_200"/>
 
         <!-- Edit Profile Text -->
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:textColor="@color/white"
-            android:background="@color/accent_color"/>
+            android:background="@color/purple_200"/>
 
         <!-- Edit Profile Text -->
 
@@ -63,9 +63,9 @@
             android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/profile_image"
+            android:contentDescription="profile_image"
             android:background="@drawable/circle_background"
-            android:src="@drawable/default_profile_image" />
+            android:src="@drawable/ic_place_holder" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:stepSize="1"
-            android:rating="@{currentUser.rating != null ? currentUser.rating : 0}"
+            android:rating="0"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp" />
 
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="@string/profile_name"
+            android:text="profile_name"
             android:gravity="center"
             android:layout_gravity="center_horizontal" />
 
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="@string/profile_email" />
+            android:text="profile_email" />
 
         <!-- Bio -->
         <TextView
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
-            android:text="@string/profile_bio" />
+            android:text="profile_bio" />
 
     </LinearLayout>
 
