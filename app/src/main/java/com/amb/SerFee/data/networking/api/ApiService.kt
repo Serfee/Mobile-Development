@@ -22,6 +22,11 @@ interface ApiService {
         @Body request: LoginRequest
     ): LoginResponse
 
+    @POST("users/current")
+    suspend fun current(
+        @Header("Authorization") token: String,
+    ): LoginResponse
+
     @GET("tasks/response")
     suspend fun getStory(
         @Header("Authorization") token: String,
