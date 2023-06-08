@@ -37,7 +37,7 @@
     <string name="date">21 Juni 2022</string>
     <string name="image_description">Gambar %1$s</string>
     <string name="menu_home">Home</string>
-    <string name="menu_map">Map</string>
-    <string name="menu_add_job">Add Task</string>
+    <string name="menu_maps">Map</string>
+    <string name="menu_add_story">Add Task</string>
     <string name="custom_spinner">Pilih Kategori</string>
 </resources>

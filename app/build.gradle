@@ -58,8 +58,16 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+
+        // Other dependencies...
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+
 
 
     // Glide

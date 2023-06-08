@@ -26,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
 
+
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -135,7 +136,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val userLatLng = LatLng(location.latitude, location.longitude)
                     val cameraPosition = CameraPosition.Builder()
                         .target(userLatLng)
-                        .zoom(14f)
+                        .zoom(10.5f)
                         .tilt(0f)
                         .bearing(0f)
                         .build()

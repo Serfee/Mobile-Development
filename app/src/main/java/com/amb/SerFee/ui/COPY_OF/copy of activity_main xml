@@ -98,20 +98,30 @@
             fab:fab_label="@string/setting"
             fab:fab_size="mini"
             />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_maps"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:fab_colorPressed="@color/purple_200"
+            android:src="@drawable/ic_baseline_map_24"
+            fab:fab_label="@string/maps"
+            app:fab_colorNormal="@color/white"
+            fab:fab_size="mini"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/fab_add_story"
+            android:src="@drawable/ic_baseline_camera_alt_24"
+            android:layout_height="wrap_content"
+            app:fab_colorPressed="@color/purple_200"
+            app:fab_colorNormal="@color/white"
+            fab:fab_label="@string/add_story"
+            fab:fab_size="mini"
+            />
+
     </com.github.clans.fab.FloatingActionMenu>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconTint="@color/purple_200"
-        app:itemTextColor="@color/black"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
-
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_bar"

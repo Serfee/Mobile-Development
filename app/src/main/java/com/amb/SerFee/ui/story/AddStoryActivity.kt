@@ -312,9 +312,6 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     private fun populateDropdownMenu(categories: List<String>) {
         val adapter = ArrayAdapter(
             this@AddStoryActivity,
