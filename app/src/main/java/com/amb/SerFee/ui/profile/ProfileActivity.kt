@@ -3,6 +3,7 @@ package com.amb.SerFee.ui.profile
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.amb.SerFee.R
 import com.amb.SerFee.data.networking.api.ApiService
 import com.amb.SerFee.databinding.ActivityProfileBinding
@@ -18,7 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfileActivity : AppCompatActivity() {
 
-    private lateinit var mapsViewModel: MapsViewModel
+    private val profileViewModel: ProfileViewModel by viewModels()
+
     private val apiService: ApiService by lazy {
         val client = OkHttpClient.Builder()
             .build()
@@ -43,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun getCurrentUser() {
         // Assuming you have an instance of addStoryViewModel available
-        mapsViewModel.getUser().observe(this) { user ->
+        profileViewModel.currentUser.observe(this) { user ->
             val token = "Bearer ${user.token}"
             GlobalScope.launch(Dispatchers.IO) {
                 try {

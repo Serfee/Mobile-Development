@@ -10,6 +10,7 @@ import com.amb.SerFee.databinding.ActivityMainBinding
 import com.amb.SerFee.ui.adapter.LoadingStateAdapter
 import com.amb.SerFee.ui.adapter.StoryAdapter
 import com.amb.SerFee.ui.maps.MapsActivity
+import com.amb.SerFee.ui.profile.ProfileActivity
 import com.amb.SerFee.ui.user.LoginActivity
 import com.amb.SerFee.ui.user.UserViewModel
 import com.amb.SerFee.util.ViewModelFactory
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickAddStory(view: View) {
-        startActivity(Intent(this, AddStoryActivity::class.java))
+        startActivity(Intent(this, ProfileActivity::class.java))
     }
 
     private fun onClickSetting(view: View) {

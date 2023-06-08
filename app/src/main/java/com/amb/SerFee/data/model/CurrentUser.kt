@@ -18,5 +18,7 @@ data class CurrentUser (
     @SerializedName("latitude")
     val lat: Double,
     @SerializedName("longitude")
-    val lon: Double
+    val lon: Double,
+    @SerializedName("token")
+    val token: String
 )
