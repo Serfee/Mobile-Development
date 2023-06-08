@@ -32,6 +32,7 @@ class UserPreferences private constructor(private val dataStore: DataStore<Prefe
             val name = preferences[NAME] ?: ""
             val token = preferences[TOKEN] ?: ""
             val state = preferences[STATE] ?: false
+
             User(name, token, state)
         }
     }

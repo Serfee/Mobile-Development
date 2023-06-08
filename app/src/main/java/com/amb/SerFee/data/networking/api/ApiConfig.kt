@@ -8,7 +8,7 @@ import java.lang.Boolean
 
 class ApiConfig {
     companion object {
-        val BASE_URL ="https://story-api.dicoding.dev/v1/"
+        val BASE_URL ="http://192.168.1.155:3000/"
         val DEBUG = Boolean.parseBoolean("true")
         fun getApiClient(): ApiService {
             val loggingInterceptor = if (DEBUG) {

@@ -18,6 +18,7 @@ import com.amb.SerFee.util.ViewModelFactory
 import com.amb.SerFee.data.Result
 import com.amb.SerFee.data.model.Story
 import com.amb.SerFee.ui.story.DetailStoryActivity
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -97,27 +98,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-private fun showMarker(data: List<Story>) {
-    data.forEach { story ->
-        val latLng = LatLng(story.lat, story.lon)
-        val marker = mMap.addMarker(
-            MarkerOptions().position(latLng)
-                .title(getString(R.string.story_from) + story.name)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-                .alpha(0.7f)
-                .snippet(story.description)
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        boundBuilder.include(latLng)
-        marker?.tag = story
-        mMap.setOnInfoWindowClickListener { marker ->
-            val intent = Intent(this, DetailStoryActivity::class.java).apply {
-                putExtra(DetailStoryActivity.EXTRA_DETAIL, marker.tag as Story)
+    private fun showMarker(data: List<Story>) {
+        data.forEach { story ->
+            val latLng = LatLng(story.lat, story.lon)
+            print(latLng)
+            val marker = mMap.addMarker(
+                MarkerOptions().position(latLng)
+                    .title(getString(R.string.story_from) + story.name)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                    .alpha(0.7f)
+                    .snippet(story.description)
+            )
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            boundBuilder.include(latLng)
+            marker?.tag = story
+            mMap.setOnInfoWindowClickListener { marker ->
+                val intent = Intent(this, DetailStoryActivity::class.java).apply {
+                    putExtra(DetailStoryActivity.EXTRA_DETAIL, marker.tag as Story)
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
         }
     }
-}
 
     private fun getMyLocation() {
         if (ContextCompat.checkSelfPermission(
@@ -126,8 +128,24 @@ private fun showMarker(data: List<Story>) {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             mMap.isMyLocationEnabled = true
+
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val userLatLng = LatLng(location.latitude, location.longitude)
+                    val cameraPosition = CameraPosition.Builder()
+                        .target(userLatLng)
+                        .zoom(14f)
+                        .tilt(0f)
+                        .bearing(0f)
+                        .build()
+
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+                }
+            }
         } else {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
+
 }
