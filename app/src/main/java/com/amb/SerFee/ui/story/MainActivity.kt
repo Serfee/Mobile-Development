@@ -106,15 +106,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_home -> {
+                //startActivity(Intent(this, MainActivity::class.java))
+                //return true
                 // Handle Home menu item click
                 // Implement your logic here
-                return true
+
             }
             R.id.menu_maps -> {
                 startActivity(Intent(this, MapsActivity::class.java))
                 return true
             }
             R.id.menu_add_story -> {
+                startActivity(Intent(this, AddStoryActivity::class.java))
                 // The AddStoryActivity will be shown by the BottomNavigationView
                 return true
             }

@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -44,11 +45,12 @@ import java.io.File
 import retrofit2.Response
 import com.amb.SerFee.data.networking.response.CategoryResponse
 import com.amb.SerFee.data.model.Category
+import com.amb.SerFee.ui.maps.MapsActivity
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-
-
-class AddStoryActivity : AppCompatActivity() {
+class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private val apiService: ApiService by lazy {
         val client = OkHttpClient.Builder()
@@ -125,6 +127,8 @@ class AddStoryActivity : AppCompatActivity() {
         }
 
         setupASAVModel()
+        val bottomNavigationView: BottomNavigationView = binding.bottomNavigation
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -319,6 +323,28 @@ class AddStoryActivity : AppCompatActivity() {
             categories
         )
         dropdownMenuBinding.setAdapter<ArrayAdapter<String>>(adapter)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_home -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                return true
+                // Handle Home menu item click
+                // Implement your logic here
+                return true
+            }
+            R.id.menu_maps -> {
+                startActivity(Intent(this, MapsActivity::class.java))
+                return true
+            }
+            R.id.menu_add_story -> {
+                //startActivity(Intent(this, AddStoryActivity::class.java))
+                // The AddStoryActivity will be shown by the BottomNavigationView
+                return true
+            }
+        }
+        return false
     }
 
 
