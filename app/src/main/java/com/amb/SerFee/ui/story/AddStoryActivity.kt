@@ -293,7 +293,7 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val categoryResponse = apiService.getCategories(token)
-                    val categories = categoryResponse.category.map { it.category_id }
+                    val categories = categoryResponse.category.map { it.category_name }
                     if (categories != null) {
                         withContext(Dispatchers.Main) {
                             populateDropdownMenu(categories)
@@ -314,13 +314,13 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
         }
     }
 
-    private fun populateDropdownMenu(categories: List<Int>) {
+    private fun populateDropdownMenu(categories: List<String>) {
         val adapter = ArrayAdapter(
             this@AddStoryActivity,
             android.R.layout.simple_dropdown_item_1line,
             categories
         )
-        dropdownMenuBinding.setAdapter<ArrayAdapter<Int>>(adapter)
+        dropdownMenuBinding.setAdapter<ArrayAdapter<String>>(adapter)
     }
 
 

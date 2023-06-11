@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val bottomNavigationView: BottomNavigationView = binding.bottomNavigation
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
-        setupMVModel()
-        setupView()
+        setupMVModel() ///
+        setupView() ///
         onClick()
     }
 

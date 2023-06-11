@@ -49,7 +49,7 @@ interface ApiService {
         @Part("description") description: RequestBody,
         @Part("lat") lat: RequestBody? = null,
         @Part("lon") lon: RequestBody? = null,
-        @Part("category_id") category: RequestBody,
+        @Part("category") category: RequestBody,
 
     ): BaseResponse
 }
