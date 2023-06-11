@@ -14,7 +14,9 @@ class AddStoryViewModel(private val repository: StoryRepository) : ViewModel() {
         description: RequestBody,
         lat: RequestBody? = null,
         lon: RequestBody? = null,
-    ) = repository.addStory(token, file, description, lat, lon)
+        category_id: RequestBody,
+
+    ) = repository.addStory(token, file, description, lat, lon, category_id)
 
     fun getUser(): LiveData<User> = repository.getUserData()
 }

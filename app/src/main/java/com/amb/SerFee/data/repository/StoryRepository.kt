@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.amb.SerFee.data.StoryPagingSource
 import com.amb.SerFee.data.Result
+import com.amb.SerFee.data.model.Category
 import com.amb.SerFee.data.model.Story
 import com.amb.SerFee.data.model.User
 import com.amb.SerFee.data.networking.api.ApiService
@@ -19,11 +20,24 @@ import com.amb.SerFee.data.networking.response.StoryResponse
 import com.amb.SerFee.data.preference.UserPreferences
 import com.amb.SerFee.data.request.LoginRequest
 import com.amb.SerFee.data.request.RegisterRequest
+import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.lang.Exception
 
 class StoryRepository (private val pref: UserPreferences, private val apiService: ApiService) {
+
+
+//    private suspend fun getCategories(token: String): List<Category> {
+//        val response = apiService.getCategories(token)
+//        if (response.isSuccessful) {
+//            return response.body()?.category ?: emptyList()
+//        } else {
+//            // Handle API error
+//            throw Exception("Failed to fetch categories")
+//        }
+//    }
+
 
     fun getStory(): LiveData<PagingData<Story>> {
         return Pager(
@@ -62,10 +76,12 @@ class StoryRepository (private val pref: UserPreferences, private val apiService
         description: RequestBody,
         lat: RequestBody? = null,
         lon: RequestBody? = null,
+        category_id: RequestBody,
+
     ): LiveData<Result<BaseResponse>> = liveData {
         try {
             emit(Result.Loading)
-            val response = apiService.addStory(token, file, description, lat, lon)
+            val response = apiService.addStory(token, file, description, lat, lon, category_id)
             emit(Result.Success(response))
         } catch (e: Exception) {
             val errorMsg = e.message.toString()

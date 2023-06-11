@@ -20,4 +20,5 @@ data class Story(
     val lat: Double,
     @SerializedName("location_longitude")
     val lon: Double
+
 ): Parcelable

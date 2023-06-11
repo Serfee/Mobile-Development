@@ -57,14 +57,12 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://serfee-project.as.r.appspot.com/")
+            .baseUrl("http://192.168.1.29:8000")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
     }
-
-
 
     private lateinit var binding: ActivityAddStoryBinding
     private lateinit var currentPhotoPath: String
@@ -112,8 +110,6 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         dropdownMenuBinding = binding.dropdownMenu as MaterialAutoCompleteTextView
-
-
 
         setContentView(binding.root)
         supportActionBar?.hide()
@@ -213,9 +209,10 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
                 val description = "${binding.etDesc.text}".toRequestBody("text/plain".toMediaType())
                 val lat = if (location != null) location?.latitude.toString().toRequestBody("text/plain".toMediaType()) else null
                 val lon = if (location != null) location?.longitude.toString().toRequestBody("text/plain".toMediaType()) else null
+                val category_id = "${binding.dropdownMenu.text}".toRequestBody("text/plain".toMediaType()) // Add this line
                 val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
-                addStoryViewModel.addStory(token, imageMultipart, description, lat, lon).observe(this@AddStoryActivity) { result ->
+                addStoryViewModel.addStory(token, imageMultipart, description, lat, lon, category_id).observe(this@AddStoryActivity) { result ->
                     when (result) {
                         is Result.Success -> {
                             Toast.makeText(this@AddStoryActivity, result.data.message, Toast.LENGTH_SHORT).show()
@@ -296,10 +293,11 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val categoryResponse = apiService.getCategories(token)
-                    val categories = categoryResponse.category.map { it.category_name }
+                    val categories = categoryResponse.category.map { it.category_id }
                     if (categories != null) {
                         withContext(Dispatchers.Main) {
                             populateDropdownMenu(categories)
+
                         }
                     }
                 } catch (e: Exception) {
@@ -316,14 +314,16 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
         }
     }
 
-    private fun populateDropdownMenu(categories: List<String>) {
+    private fun populateDropdownMenu(categories: List<Int>) {
         val adapter = ArrayAdapter(
             this@AddStoryActivity,
             android.R.layout.simple_dropdown_item_1line,
             categories
         )
-        dropdownMenuBinding.setAdapter<ArrayAdapter<String>>(adapter)
+        dropdownMenuBinding.setAdapter<ArrayAdapter<Int>>(adapter)
     }
+
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -346,6 +346,5 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
         }
         return false
     }
-
 
 }

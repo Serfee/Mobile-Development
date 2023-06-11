@@ -8,7 +8,7 @@ import java.lang.Boolean
 
 class ApiConfig {
     companion object {
-        val BASE_URL ="https://serfee-project.as.r.appspot.com/"
+        val BASE_URL ="http://192.168.1.29:8000"  //https://serfee-project.as.r.appspot.com/
         val DEBUG = Boolean.parseBoolean("true")
         fun getApiClient(): ApiService {
             val loggingInterceptor = if (DEBUG) {
