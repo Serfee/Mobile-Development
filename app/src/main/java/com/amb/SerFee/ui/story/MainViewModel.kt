@@ -10,6 +10,7 @@ import com.amb.SerFee.data.model.User
 import com.amb.SerFee.data.repository.StoryRepository
 
 class MainViewModel (private val repository: StoryRepository) : ViewModel() {
+    private var cleaningStories: LiveData<PagingData<Story>>? = null
 
     fun getStory(): LiveData<PagingData<Story>> {
         return  repository.getStory().cachedIn(viewModelScope)
@@ -18,4 +19,8 @@ class MainViewModel (private val repository: StoryRepository) : ViewModel() {
     fun getUser(): LiveData<User> {
         return repository.getUserData()
     }
+    fun clearStory() {
+        cleaningStories = null
+    }
+
 }

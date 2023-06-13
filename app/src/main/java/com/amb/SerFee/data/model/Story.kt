@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Story(
     @SerializedName("request_id")
-    val id: String,
+    val id: Int,
     @SerializedName("full_name")
     val name: String?,
     @SerializedName("description")

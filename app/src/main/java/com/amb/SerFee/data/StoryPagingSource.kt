@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.first
 
 class StoryPagingSource(
     private val apiService: ApiService,
-    private val pref: UserPreferences
+    private val pref: UserPreferences,
+
+
 ) : PagingSource<Int, Story>() {
 
     private companion object {
@@ -20,8 +22,7 @@ class StoryPagingSource(
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
             val token = "Bearer ${pref.getUserData().first().token}"
-            val responseData = apiService.getStory(token, page, params.loadSize).listStory
-
+            val responseData = apiService.getStory(token, page, params.loadSize,category = "Cleaning").listStory
             LoadResult.Page(
                 data = responseData,
                 prevKey = if (page == INITIAL_PAGE_INDEX) null else page - 1,

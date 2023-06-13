@@ -30,52 +30,25 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/ll_buttons"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_story"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <Button
-            android:id="@+id/btnCleaning"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cornerRadius="16dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="Cleaning" />
-
-        <Button
-            android:id="@+id/btnGardening"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cornerRadius="16dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="Gardening" />
-
-        <Button
-            android:id="@+id/btnFixing"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cornerRadius="16dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="Fixing" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_story" />
 
 
 
 
 
-    <!-- Dont change anything under this-->
+<!-- Dont change anything under this-->
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_menu"
         android:layout_width="wrap_content"

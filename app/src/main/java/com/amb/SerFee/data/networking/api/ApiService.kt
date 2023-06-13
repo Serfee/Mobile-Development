@@ -1,5 +1,6 @@
 package com.amb.SerFee.data.networking.api
 
+import com.amb.SerFee.data.model.ApplyJobRequest
 import com.amb.SerFee.data.networking.response.BaseResponse
 import com.amb.SerFee.data.networking.response.CategoryResponse
 import com.amb.SerFee.data.networking.response.LoginResponse
@@ -28,6 +29,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
+        @Query("category") category: String
     ): StoryResponse
 
     @GET("tasks")
@@ -51,5 +53,12 @@ interface ApiService {
         @Part("lon") lon: RequestBody? = null,
         @Part("category") category: RequestBody,
 
+    ): BaseResponse
+
+
+    @POST("tasks/response")
+    suspend fun applyJob(
+        @Header("Authorization") token: String,
+        @Part("request_id") request_id: Int,
     ): BaseResponse
 }

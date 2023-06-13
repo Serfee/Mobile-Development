@@ -17,7 +17,7 @@
     <string name="created_at">Diunggah pada %1$s</string>
     <string name="detail_story">Detail Story</string>
     <string name="camera">Kamera</string>
-    <string name="location">Lokasi (Opsional)</string>
+    <string name="location">Lokasi</string>
     <string name="description">Deskripsi</string>
     <string name="email">Email</string>
     <string name="upload">Unggah</string>

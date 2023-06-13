@@ -11,7 +11,7 @@
     <string name="name_required">Name is required</string>
     <string name="name">Name</string>
     <string name="camera">Camera</string>
-    <string name="location">Location (Optional)</string>
+    <string name="location">Location</string>
     <string name="preview">Preview</string>
     <string name="gallery">Gallery</string>
     <string name="description">Description</string>

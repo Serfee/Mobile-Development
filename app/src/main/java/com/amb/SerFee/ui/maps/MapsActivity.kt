@@ -177,3 +177,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, BottomNavigationVi
         return false
     }
 }
+

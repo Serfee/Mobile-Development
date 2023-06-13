@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.amb.SerFee.R
-import com.amb.SerFee.databinding.ActivityAddStoryBinding
 import com.amb.SerFee.util.ViewModelFactory
 import com.amb.SerFee.util.createCustomTempFile
 import com.amb.SerFee.util.reduceFileImage
@@ -45,6 +44,7 @@ import java.io.File
 import retrofit2.Response
 import com.amb.SerFee.data.networking.response.CategoryResponse
 import com.amb.SerFee.data.model.Category
+import com.amb.SerFee.databinding.ActivityAddStoryBinding
 import com.amb.SerFee.ui.maps.MapsActivity
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -57,7 +57,7 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.29:8000")
+            .baseUrl("http://192.168.186.226:8000")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
