@@ -41,12 +41,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import retrofit2.Response
-import com.amb.SerFee.data.networking.response.CategoryResponse
-import com.amb.SerFee.data.model.Category
 import com.amb.SerFee.databinding.ActivityAddStoryBinding
 import com.amb.SerFee.ui.maps.MapsActivity
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -57,7 +53,7 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.186.226:8000")
+            .baseUrl("http://192.168.1.113:8000")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

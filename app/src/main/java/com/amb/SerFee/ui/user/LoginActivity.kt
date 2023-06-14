@@ -74,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
         finishAffinity()
     }
 
+
     private fun handleLoginError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         showProgressIndicator(false)

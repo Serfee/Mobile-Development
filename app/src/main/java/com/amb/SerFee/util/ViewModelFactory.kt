@@ -7,6 +7,7 @@ import com.amb.SerFee.data.repository.StoryRepository
 import com.amb.SerFee.di.StoryInjection
 import com.amb.SerFee.ui.maps.MapsViewModel
 import com.amb.SerFee.ui.story.AddStoryViewModel
+import com.amb.SerFee.ui.story.DetailStoryViewModel
 import com.amb.SerFee.ui.user.UserViewModel
 import com.amb.SerFee.ui.story.MainViewModel
 
@@ -26,6 +27,9 @@ class ViewModelFactory (private val repository: StoryRepository) :
         }
         if (modelClass.isAssignableFrom(MapsViewModel::class.java)) {
             return MapsViewModel(repository) as T
+        }
+        if (modelClass.isAssignableFrom(DetailStoryViewModel::class.java)) {
+            return DetailStoryViewModel(repository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.simpleName)

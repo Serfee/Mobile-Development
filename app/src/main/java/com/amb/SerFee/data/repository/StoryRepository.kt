@@ -77,16 +77,14 @@ class StoryRepository (private val pref: UserPreferences, private val apiService
     }
 
 
-//    suspend fun applyJob(token: String, requestId: Int): Result<BaseResponse> {
-//        return try {
-//            val response = apiService.applyJob(token, requestId)
-//            Result.Success(response)
-//        } catch (e: Exception) {
-//            Result.Error(e.message.toString())
-//        }
-//    }
-
-
+    suspend fun applyJob(token: String, requestId: Int): Result<BaseResponse> {
+        return try {
+            val response = apiService.applyJob(token, requestId)
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
+    }
 
     fun getStoryLocation(token: String): LiveData<Result<StoryResponse>> = liveData {
         emit(Result.Loading)

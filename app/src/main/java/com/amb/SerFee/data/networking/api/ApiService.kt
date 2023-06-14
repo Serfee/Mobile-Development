@@ -55,10 +55,10 @@ interface ApiService {
 
     ): BaseResponse
 
-
+    @FormUrlEncoded //
     @POST("tasks/response")
     suspend fun applyJob(
         @Header("Authorization") token: String,
-        @Part("request_id") request_id: Int,
+        @Field("request_id") request_id: Int,
     ): BaseResponse
 }

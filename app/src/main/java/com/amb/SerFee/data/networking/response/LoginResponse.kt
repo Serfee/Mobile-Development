@@ -10,3 +10,4 @@ data class LoginResponse(
     @SerializedName("loginResult")
     val loginResult: Login?,
 )
+
