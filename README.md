@@ -4,18 +4,18 @@ Serfee is an Android application that connects individuals in need with local, k
 
 
 ## Features
-- **Login/Logout**: Users can securely log in and log out of their accounts.
-- **Register**: New users can create an account to access the app's features.
-- **Multi-Language Support**: The app supports English and Indonesian languages for a wider user base.
-- **Animations**: Animations are implemented on various pages to enhance the user experience.
-- **Task Listing**: Users can view all tasks they have created.
-- **Map Integration**: The app includes a map feature that allows users to visualize tasks and their locations.
-- **Task Creation**: Users can add tasks by providing a description, image, live location, date, and category of the job.
+- [x] **Login/Logout**: Users can securely log in and log out of their accounts.
+- [x] **Register**: New users can create an account to access the app's features.
+- [x] **Multi-Language Support**: The app supports English and Indonesian languages for a wider user base.
+- [x] **Animations**: Animations are implemented on various pages to enhance the user experience.
+- [x] **Task Listing**: Users can view all tasks they have created.
+- [x] **Map Integration**: The app includes a map feature that allows users to visualize tasks and their locations.
+- [x] **Task Creation**: Users can add tasks by providing a description, image, live location, date, and category of the job.
+- [ ] **Apply & Accept Job Requests**: Users will be able to apply for job requests and accept offers from helpers.
+- [ ] **Chat**: Users will be able to communicate with helpers and discuss job details through a chat feature.
+- [ ] **Feedback**: Users will have the ability to provide feedback on completed tasks, helping the community maintain trust and transparency.
 
-### Under Development
-- **Apply & Accept Job Requests** : Users will be able to apply for job requests and accept offers from helpers.
-- **Chat** : Users will be able to communicate with helpers and discuss job details through a chat feature.
-- **Feedback** : Users will have the ability to provide feedback on completed tasks, helping the community maintain trust and transparency.
+The above task list shows the completed features marked with checkboxes and the under development features without checkboxes.
 
 ## Screenshots
 
