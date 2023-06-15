@@ -114,7 +114,7 @@ class DetailStoryActivity : AppCompatActivity() {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://serfee-project.as.r.appspot.com")
+            .baseUrl("http://192.168.1.113:8000")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -161,7 +161,7 @@ class DetailStoryActivity : AppCompatActivity() {
     }
 
     private fun setupApplyButton() {
-        binding.fabKontol.setOnClickListener {
+        binding.fabApply.setOnClickListener {
             val request = ApplyJobRequest("i can buy u", story?.id ?: -1)
 
             detailStoryViewModel.getUser().observe(this@DetailStoryActivity) { user ->

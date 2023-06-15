@@ -6,20 +6,11 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.emoji.text.EmojiCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingSource
 import com.amb.SerFee.R
-import com.amb.SerFee.data.StoryPagingSource
-import com.amb.SerFee.data.model.Story
-import com.amb.SerFee.data.networking.api.ApiService
-import com.amb.SerFee.data.preference.UserPreferences
 import com.amb.SerFee.databinding.ActivityMainBinding
 import com.amb.SerFee.ui.fragment.CleaningActivity
-import com.amb.SerFee.ui.fragment.FixingFragment
-import com.amb.SerFee.ui.fragment.GardeningFragment
 import com.amb.SerFee.ui.maps.MapsActivity
 import com.amb.SerFee.ui.user.LoginActivity
 import com.amb.SerFee.ui.user.UserViewModel
@@ -27,6 +18,7 @@ import com.amb.SerFee.util.ViewModelFactory
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.emoji.bundled.BundledEmojiCompatConfig
 
 
 
@@ -46,15 +38,31 @@ class MainActivity (): AppCompatActivity(), BottomNavigationView.OnNavigationIte
 
         setupMVModel()
         onClick()
+
+        val config = BundledEmojiCompatConfig(applicationContext)
+        EmojiCompat.init(config)
+
     }
 
     private fun onClick() {
         binding.fabLogOut.setOnClickListener(::onClickLogOut)
         binding.fabSetting.setOnClickListener(::onClickSetting)
         binding.btnCleaning.setOnClickListener (::onClickCleaning)
+        binding.btnGardening.setOnClickListener (::onClickGardening)
+        binding.btnFixing.setOnClickListener (::onClickFixing)
 
     }
     private fun onClickCleaning(view: View) {
+        startActivity(Intent(this, CleaningActivity::class.java))
+        finishAffinity()
+    }
+
+    private fun onClickGardening(view: View) {
+        startActivity(Intent(this, CleaningActivity::class.java))
+        finishAffinity()
+    }
+
+    private fun onClickFixing(view: View) {
         startActivity(Intent(this, CleaningActivity::class.java))
         finishAffinity()
     }

@@ -53,7 +53,7 @@ class AddStoryActivity : AppCompatActivity(), BottomNavigationView.OnNavigationI
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.113:8000")
+            .baseUrl("https://serfee-project.as.r.appspot.com/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
