@@ -1,32 +1,32 @@
 # Serfee App
 
-Serfee is an Android application that connects individuals in need with local, kind helpers. The app aims to create a fair and trusted community by facilitating the exchange of paid services. Users can easily request assistance, broadcast their location, and receive offers from nearby helpers. Through the conversation window, users can negotiate prices, reach agreements, and complete transactions. Additionally, the app allows users to provide feedback for the helpers, contributing to the community's growth and improvement.
+Serfee is an Android application that connects individuals in need with local, kind helpers. The app aims to create a fair and trusted community by facilitating the exchange of paid services. Users can easily request assistance, broadcast their location, and receive offers from nearby helpers. Through the conversation window, users can negotiate prices, reach agreements, and complete transactions. Additionally, the app allows users to provide feedback for the helpers, contributing to the community's growth and improvement. 🤝💼
 
 
 ## Features
-- [x] **Login/Logout**: Users can securely log in and log out of their accounts.
-- [x] **Register**: New users can create an account to access the app's features.
-- [x] **Multi-Language Support**: The app supports English and Indonesian languages for a wider user base.
-- [x] **Animations**: Animations are implemented on various pages to enhance the user experience.
-- [x] **Task Listing**: Users can view all tasks they have created.
-- [x] **Map Integration**: The app includes a map feature that allows users to visualize tasks and their locations.
-- [x] **Task Creation**: Users can add tasks by providing a description, image, live location, date, and category of the job.
-- [ ] **Apply & Accept Job Requests**: Users will be able to apply for job requests and accept offers from helpers.
-- [ ] **Chat**: Users will be able to communicate with helpers and discuss job details through a chat feature.
-- [ ] **Feedback**: Users will have the ability to provide feedback on completed tasks, helping the community maintain trust and transparency.
+- [x] **Login/Logout**: Users can securely log in and log out of their accounts. 🔒
+- [x] **Register**: New users can create an account to access the app's features. 📝✅
+- [x] **Multi-Language Support**: The app supports English and Indonesian languages for a wider user base. 🌐🌍
+- [x] **Animations**: Animations are implemented on various pages to enhance the user experience. 🎬
+- [x] **Task Listing**: Users can view all tasks they have created. 📋
+- [x] **Map Integration**: The app includes a map feature that allows users to visualize tasks and their locations. 🗺️
+- [x] **Task Creation**: Users can add tasks by providing a description, image, live location, date, and category of the job. 📝🖼️📍📅🏷️
+- [ ] **Apply & Accept Job Requests**: Users will be able to apply for job requests and accept offers from helpers. 📨✉️
+- [ ] **Chat**: Users will be able to communicate with helpers and discuss job details through a chat feature. 💬
+- [ ] **Feedback**: Users will have the ability to provide feedback on completed tasks, helping the community maintain trust and transparency.🌟🗣️
 
-The above task list shows the completed features marked with checkboxes and the under development features without checkboxes.
+The above task list shows the completed features marked with checkboxes and the under development features without checkboxes.🚀
 
-## Screenshots
+## Screenshots📸
 
 
-## Installation
+## Installation⚙️
 
 1. Clone the repository: `git clone https://github.com/Serfee/Mobile-Development.git`
 2. Open the project in Android Studio.
-3. Build and run the application on your Android device or emulator.
+3. Build and run the application on your Android device or emulator.🚀
 
-## Dependencies
+## Dependencies📦
 ```
 dependencies {
 
@@ -69,7 +69,7 @@ dependencies {
 }
 ```
 
-## API Documentation
+## API Documentation🔗
 
 ```kotlin
 interface ApiService {
@@ -177,7 +177,7 @@ interface ApiService {
 ```
 
 
-## Model
+## Model📄
 ### Story
 
 ```kotlin
@@ -233,7 +233,7 @@ Properties:
 - `name`: The name of the logged-in user.
 - `token`: The authentication token for the logged-in user.
 
-## Contributing
+## Contributing✍️
 
 We welcome contributions from the community! If you would like to contribute to Serfee, please follow these guidelines:
 
