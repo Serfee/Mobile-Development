@@ -69,6 +69,170 @@ dependencies {
 }
 ```
 
+## API Documentation
+
+```kotlin
+interface ApiService {
+
+    /**
+     * Registers a new user.
+     *
+     * @param request The registration request body.
+     * @return The base response containing the result of the registration.
+     */
+    @POST("auth/register")
+    suspend fun register(
+        @Body request: RegisterRequest
+    ): BaseResponse
+
+
+    /**
+     * Logs in a user.
+     *
+     * @param request The login request body.
+     * @return The login response containing the user's authentication token.
+     */
+    @POST("auth/login")
+    suspend fun login(
+        @Body request: LoginRequest
+    ): LoginResponse
+
+    /**
+     * Retrieves a list of stories based on the specified page, size, and category.
+     *
+     * @param token The user's authentication token.
+     * @param page The page number to retrieve.
+     * @param size The number of stories to retrieve per page.
+     * @param category The category of stories to retrieve.
+     * @return The response containing the list of stories.
+     */
+    @GET("tasks")
+    suspend fun getStory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("category") category: String
+    ): StoryResponse
+
+    /**
+     * Retrieves a list of stories based on the user's current location.
+     *
+     * @param token The user's authentication token.
+     * @param location The user's current location.
+     * @return The response containing the list of stories.
+     */
+    @GET("tasks")
+    suspend fun getStoryLocation(
+        @Header("Authorization") token: String,
+        @Query("location") location: Int = 1,
+    ): StoryResponse
+
+    /**
+     * Retrieves a list of available categories.
+     *
+     * @param token The user's authentication token.
+     * @return The response containing the list of categories.
+     */
+    @GET("tasks/category")
+    suspend fun getCategories(
+        @Header("Authorization") token: String
+    ): CategoryResponse
+
+    /**
+     * Adds a new story.
+     *
+     * @param token The user's authentication token.
+     * @param file The file representing the story (e.g., image).
+     * @param description The description of the story.
+     * @param lat The latitude of the story location.
+     * @param lon The longitude of the story location.
+     * @param category The category of the story.
+     * @return The base response containing the result of the story addition.
+     */
+    @Multipart
+    @POST("tasks/request")
+    suspend fun addStory(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody? = null,
+        @Part("lon") lon: RequestBody? = null,
+        @Part("category") category: RequestBody,
+    ): BaseResponse
+
+    /**
+     * Applies for a job request.
+     *
+     * @param token The user's authentication token.
+     * @param request_id The ID of the job request to apply for.
+     * @return The base response containing the result of the job application.
+     */
+    @FormUrlEncoded
+    @POST("tasks/response")
+    suspend fun applyJob(
+        @Header("Authorization") token: String,
+        @Field("request_id") request_id: Int,
+    ): BaseResponse
+}
+```
+
+
+## Model
+### Story
+
+```kotlin
+@Parcelize
+data class Story(
+    @SerializedName("request_id")
+    val id: Int,
+    @SerializedName("full_name")
+    val name: String?,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("image_url")
+    val photoUrl: String?,
+    @SerializedName("created_at")
+    val createdAt: String?,
+    @SerializedName("location_latitude")
+    val lat: Double,
+    @SerializedName("location_longitude")
+    val lon: Double
+): Parcelable
+```
+
+This model represents a story in the application.
+
+Properties:
+- `id`: The ID of the story.
+- `name`: The full name of the user who created the story.
+- `description`: The description of the story.
+- `photoUrl`: The URL of the story's image.
+- `createdAt`: The creation date of the story.
+- `lat`: The latitude of the story's location.
+- `lon`: The longitude of the story's location.
+
+---
+
+### Login
+
+```kotlin
+data class Login(
+    @SerializedName("userId")
+    val userId: String?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("token")
+    val token: String?
+)
+```
+
+This model represents the login response from the API.
+
+Properties:
+- `userId`: The ID of the logged-in user.
+- `name`: The name of the logged-in user.
+- `token`: The authentication token for the logged-in user.
+
 ## Contributing
 
 We welcome contributions from the community! If you would like to contribute to Serfee, please follow these guidelines:
