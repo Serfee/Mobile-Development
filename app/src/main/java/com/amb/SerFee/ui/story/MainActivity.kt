@@ -19,7 +19,7 @@ import com.amb.SerFee.util.ViewModelFactory
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.emoji.bundled.BundledEmojiCompatConfig
-
+import com.amb.SerFee.ui.ProfileActivity
 
 
 class MainActivity (): AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +50,7 @@ class MainActivity (): AppCompatActivity(), BottomNavigationView.OnNavigationIte
         binding.btnCleaning.setOnClickListener (::onClickCleaning)
         binding.btnGardening.setOnClickListener (::onClickGardening)
         binding.btnFixing.setOnClickListener (::onClickFixing)
+        binding.btnProfile.setOnClickListener (::onClickProfile)
 
     }
     private fun onClickCleaning(view: View) {
@@ -64,6 +65,11 @@ class MainActivity (): AppCompatActivity(), BottomNavigationView.OnNavigationIte
 
     private fun onClickFixing(view: View) {
         startActivity(Intent(this, CleaningActivity::class.java))
+        finishAffinity()
+    }
+
+    private fun onClickProfile(view: View) {
+        startActivity(Intent(this, ProfileActivity::class.java))
         finishAffinity()
     }
 

@@ -82,7 +82,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setAnimation() {
         val appIcon = ObjectAnimator.ofFloat(binding.icon, View.ALPHA, 1f).setDuration(700)
-        val appName = ObjectAnimator.ofFloat(binding.tvStory, View.ALPHA, 1f).setDuration(700)
         val etEmail = ObjectAnimator.ofFloat(binding.etEmail, View.ALPHA, 1f).setDuration(700)
         val etPass = ObjectAnimator.ofFloat(binding.etPass, View.ALPHA, 1f).setDuration(700)
         val btnLogin = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(700)
@@ -90,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
         val txtSignup = ObjectAnimator.ofFloat(binding.tvSignup, View.ALPHA, 1f).setDuration(700)
 
         val textAnimation = AnimatorSet().apply {
-            playTogether(appName, txtSignup, txtHaveAc)
+            playTogether( txtSignup, txtHaveAc)
             duration = 700
         }
         val layoutAnimation = AnimatorSet().apply {

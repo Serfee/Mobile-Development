@@ -40,4 +40,11 @@
     <string name="menu_maps">Map</string>
     <string name="menu_add_story">Add Task</string>
     <string name="custom_spinner">Pilih Kategori</string>
+    <string name="user_name">Akha MB</string>
+    <string name="welcome">Selamat datang!</string>
+    <string name="find_task">Lets find your task</string>
+    <string name="house_cleaning">Membersihkan rumah</string>
+    <string name="nearby_tasks">Pekerjaan terdekat</string>
+    <string name="_2_meters">2 meter</string>
+
 </resources>

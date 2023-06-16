@@ -13,27 +13,14 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:alpha="0"
-        android:src="@drawable/icon_app"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/logologinn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/et_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView
-        android:id="@+id/tv_story"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:alpha="0"
-        android:fontFamily="@font/aguafina_script"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/et_email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon"
-        />
 
     <com.amb.SerFee.customview.EmailTField
         android:id="@+id/et_email"

@@ -75,6 +75,10 @@
             android:name=".ui.fragment.CleaningActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:exported="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.amb.SerFee"
