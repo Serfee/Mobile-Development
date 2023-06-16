@@ -205,7 +205,7 @@ interface ApiService {
 
 ## Model📄
 
-### Story
+### Its fordata class for TASK
 
 ```kotlin
 @Parcelize
