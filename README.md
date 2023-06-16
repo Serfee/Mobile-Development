@@ -2,8 +2,8 @@
 
 Serfee is an Android application that connects individuals in need with local, kind helpers. The app aims to create a fair and trusted community by facilitating the exchange of paid services. Users can easily request assistance, broadcast their location, and receive offers from nearby helpers. Through the conversation window, users can negotiate prices, reach agreements, and complete transactions. Additionally, the app allows users to provide feedback for the helpers, contributing to the community's growth and improvement. 🤝💼
 
-
 ## Features
+
 - [x] **Login/Logout**: Users can securely log in and log out of their accounts. 🔒
 - [x] **Register**: New users can create an account to access the app's features. 📝✅
 - [x] **Multi-Language Support**: The app supports English and Indonesian languages for a wider user base. 🌐🌍
@@ -19,6 +19,32 @@ The above task list shows the completed features marked with checkboxes and the 
 
 ## Screenshots📸
 
+<div style="display: flex; flex-direction:row; width:200px">
+    <img src='screenshot/1.jpeg'/>
+    <img src='screenshot/2.jpeg'/>
+    <img src='screenshot/3.jpeg'/>
+    <img src='screenshot/4.jpeg'/>
+</div>
+
+### Add Task
+
+<div style="display: flex; flex-direction:row; width:200px">
+    <img src='screenshot/add_task.jpeg'/>
+</div>
+
+### Find Task
+
+<div style="display: flex; flex-direction:row; width:200px">
+    <img src='screenshot/find_task.jpeg'/>
+    <img src='screenshot/find_task_1.jpeg'/>
+    <img src='screenshot/find_task_2.jpeg'/>
+</div>
+
+### Profile
+
+<div style="display: flex; flex-direction:row; width:200px">
+    <img src='screenshot/profile.jpeg'/>
+</div>
 
 ## Installation⚙️
 
@@ -27,6 +53,7 @@ The above task list shows the completed features marked with checkboxes and the 
 3. Build and run the application on your Android device or emulator.🚀
 
 ## Dependencies📦
+
 ```
 dependencies {
 
@@ -176,8 +203,8 @@ interface ApiService {
 }
 ```
 
-
 ## Model📄
+
 ### Story
 
 ```kotlin
@@ -203,6 +230,7 @@ data class Story(
 This model represents a story in the application.
 
 Properties:
+
 - `id`: The ID of the story.
 - `name`: The full name of the user who created the story.
 - `description`: The description of the story.
@@ -229,6 +257,7 @@ data class Login(
 This model represents the login response from the API.
 
 Properties:
+
 - `userId`: The ID of the logged-in user.
 - `name`: The name of the logged-in user.
 - `token`: The authentication token for the logged-in user.
@@ -246,4 +275,5 @@ We welcome contributions from the community! If you would like to contribute to 
 Please make sure to adhere to our code of conduct and maintain a respectful and inclusive environment.
 
 ## Author
+
 [Akha Balasi](https://github.com/Akha99)
